@@ -13,16 +13,61 @@
 .ml-20 {
   margin-left: 5rem; /* 80px */
 }
-
+.p-0 {
+  padding: 0px;
+}
+.p-1 {
+  padding: 0.25rem;
+}
+.p-10 {
+  padding: 2.5rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
 .p-5 {
   padding: 1.25rem; /* 20px */
 }
-
 .p-10 {
   padding: 2.5rem; /* 40px */
 }
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.px-7 {
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
 
-.py-3 {
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -34,30 +79,17 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }
-
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
-
 .py-20 {
   padding-top: 5rem;
   padding-bottom: 5rem;
-}
-
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
 }
 
 .space-y-2 > * + * {
@@ -93,6 +125,19 @@
 }
 .mt-20 {
   margin-top: 5rem; /* 20px */
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.ml-3 {
+  margin-left: 0.75rem;
+}
+.ml-5 {
+  margin-left: 1.25rem;
+}
+.ml-64 {
+  margin-left: 16rem;
 }
 
 .bg-slate-50 {
@@ -213,27 +258,58 @@
 .bg-white {
   background-color: white;
 }
-
+.w-1 {
+  width: 0.25rem;
+}
 .w-5 {
   width: 1.25rem; /* 20px */
 }
-
 .w-10 {
-  width: 2.5rem; /* 40px */
+  width: 2.5rem;
 }
-
+.w-11 {
+  width: 2.75rem;
+}
+.w-2 {
+  width: 0.5rem;
+}
+.w-3 {
+  width: 0.75rem;
+}
+.w-4 {
+  width: 1rem;
+}
+.w-5 {
+  width: 1.25rem;
+}
+.w-8 {
+  width: 2rem;
+}
+.w-60 {
+  width: 15rem;
+}
+.w-96 {
+  width: 24rem;
+}
 .w-full {
   width: 100%;
 }
-
 .w-80p {
   width: 80%;
 }
-
 .w-60p {
   width: 60%;
 }
 
+.h-2 {
+  height: 0.5rem;
+}
+.h-3 {
+  height: 0.75rem;
+}
+.h-4 {
+  height: 1rem;
+}
 .h-5 {
   height: 1.25rem; /* 20px */
 }
@@ -252,11 +328,23 @@
 .h-10 {
   height: 2.5rem; /* 40px */
 }
+.h-11 {
+  height: 2.75rem;
+}
+.h-12 {
+  height: 3rem;
+}
 .h-16 {
-  height: 4rem; /* 64px */
+  height: 4rem;
 }
 .h-20 {
   height: 5rem; /* 80px */
+}
+.h-24 {
+  height: 6rem;
+}
+.h-80 {
+  height: 20rem;
 }
 
 .h-full {
@@ -300,7 +388,7 @@
 }
 
 .left-10 {
-  left: 10px;
+  left: 2.5rem; /* 40px */
 }
 
 .right-10 {
@@ -311,7 +399,7 @@
 }
 
 .-bottom-5 {
-  bottom: -5px;
+  bottom: -1.25rem; /* 20px */
 }
 
 .relative {
@@ -343,6 +431,21 @@
 }
 
 .jb {
+  justify-content: space-between;
+}
+.items-center {
+  align-items: center;
+}
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
   justify-content: space-between;
 }
 
@@ -431,8 +534,7 @@
 }
 
 .shadow-xl {
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
 .bg-gradient-to-r {
@@ -473,4 +575,89 @@
 
 .z-30 {
   z-index: 30;
+}
+
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+
+.duration-100 {
+  transition: 100ms;
+}
+.duration-200 {
+  transition: 200ms;
+}
+.duration-300 {
+  transition: 300ms;
+}
+.duration-500 {
+  transition: 500ms;
+}
+.duration-700 {
+  transition: 700ms;
+}
+.duration-1000 {
+  transition: 1000ms;
+}
+
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.align-middle {
+  vertical-align: middle;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}
+.opacity-70 {
+  opacity: 0.7;
+}
+
+/* Hover  */
+.hover\:bg-slate-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-slate-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-zinc-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 250 250 / var(--tw-bg-opacity));
+}
+
+/* Hover  */
+
+@media (min-width: 640px) {
+  .sm\:flex {
+    display: flex;
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
+  .sm\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .sm\:gap-5 {
+    gap: 1.25rem;
+  }
 }
