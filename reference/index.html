@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mock-tailwind.css" />
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/8fdf25c9b3.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>4조사주</title>
+  </head>
+  <body class="w-full bg-slate-200" id="root">
+    <progress
+      class="fixed w-full -bottom-5 h-5 z-20"
+      value="0"
+      max="1"
+      id="progress"
+    ></progress>
+    <header
+      class="fixed w-full h-16 top-0 bg-zinc-900 text-white flex ic jb z-10"
+    >
+      <img src="/images/images.png" width="100px" class="px-10" />
+      <ul class="flex gap-10 font-semibold">
+        <li class="cursor-pointer">별자리</li>
+        <li class="cursor-pointer">사주 팔자</li>
+        <li class="cursor-pointer">타로 운세</li>
+      </ul>
+      <div class="px-10">로그인</div>
+    </header>
+
+    <main class="w-full flex flex-col jc ic gap-10">
+      <section class="w-full py-20 text-white flex ic" id="bg">
+        <h1 class="font-bold ml-20">
+          새로운 하루에 운세의 비밀들이 기다립니다.<br />
+          함께 그 숨은 이야기를 발견해봐요
+        </h1>
+      </section>
+      <section id="total-fortune">
+        <article class="p-10 rounded-2xl bg-white flex flex-col gap-10">
+          <h2 class="font-bold">총 운세</h2>
+          <div class="flex gap-10">
+            <div class="w-60p">
+              <canvas id="myDonutChart"></canvas>
+            </div>
+            <hgroup class="font-bold space-y-10">
+              <h2 class="font-bold text-rose-500">80점</h2>
+              <p class="mt-5 max-w-500">
+                주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도 생겨나고
+                조력자도 얻게 될 거예요. 평소에는 앞만 보고 달렸지만, 오늘은
+                따스한 온정을 나누어 보아요.주변을 둘러보며 조화롭고 유연한
+                태도로 행동하면, 이익도 생겨나고 조력자도 얻게 될 거예요.
+                평소에는 앞만 보고 달렸지만, 오늘은 따스한 온정을 나누어
+                보아요.주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도
+                생겨나고 조력자도 얻게 될 거예요. 평소에는 앞만 보고 달렸지만,
+                오늘은 따스한 온정을 나누어 보아요.주변을 둘러보며 조화롭고
+                유연한 태도로 행동하면, 이익도 생겨나고 조력자도 얻게 될 거예요.
+              </p>
+            </hgroup>
+          </div>
+        </article>
+      </section>
+      <section class="w-60p p-10">
+        <article class="bg-white rounded-2xl fortune shadow-lg p-10 space-y-10">
+          <h2 class="font-semibold">오늘의 운세</h2>
+          <div class="w-60p flex ic jc">
+            <div class="w-60p">
+              <canvas id="myChart"></canvas>
+            </div>
+          </div>
+
+          <h3 class="font-semibold">연애운</h3>
+          <p class="mt-5 max-w-500">
+            주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도 생겨나고
+            조력자도 얻게 될 거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한
+            온정을 나누어 보아요.주변을 둘러보며 조화롭고 유연한 태도로
+            행동하면, 이익도 생겨나고 조력자도 얻게 될 거예요. 평소에는 앞만
+            보고 달렸지만, 오늘은 따스한 온정을 나누어 보아요.주변을 둘러보며
+            조화롭고 유연한 태도로 행동하면, 이익도 생겨나고 조력자도 얻게 될
+            거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한 온정을 나누어
+            보아요.주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도
+            생겨나고 조력자도 얻게 될 거예요.
+          </p>
+
+          <h3 class="font-semibold">연애운</h3>
+          <p class="mt-5 max-w-500">
+            주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도 생겨나고
+            조력자도 얻게 될 거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한
+            온정을 나누어 보아요.주변을 둘러보며 조화롭고 유연한 태도로
+            행동하면, 이익도 생겨나고 조력자도 얻게 될 거예요. 평소에는 앞만
+            보고 달렸지만, 오늘은 따스한 온정을 나누어 보아요.주변을 둘러보며
+            조화롭고 유연한 태도로 행동하면, 이익도 생겨나고 조력자도 얻게 될
+            거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한 온정을 나누어
+            보아요.주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도
+            생겨나고 조력자도 얻게 될 거예요.
+          </p>
+
+          <h3 class="font-semibold">연애운</h3>
+          <p class="mt-5 max-w-500">
+            주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도 생겨나고
+            조력자도 얻게 될 거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한
+            온정을 나누어 보아요.주변을 둘러보며 조화롭고 유연한 태도로
+            행동하면, 이익도 생겨나고 조력자도 얻게 될 거예요. 평소에는 앞만
+            보고 달렸지만, 오늘은 따스한 온정을 나누어 보아요.주변을 둘러보며
+            조화롭고 유연한 태도로 행동하면, 이익도 생겨나고 조력자도 얻게 될
+            거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한 온정을 나누어
+            보아요.주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도
+            생겨나고 조력자도 얻게 될 거예요.
+          </p>
+
+          <h3 class="font-semibold">연애운</h3>
+          <p class="mt-5 max-w-500">
+            주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도 생겨나고
+            조력자도 얻게 될 거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한
+            온정을 나누어 보아요.주변을 둘러보며 조화롭고 유연한 태도로
+            행동하면, 이익도 생겨나고 조력자도 얻게 될 거예요. 평소에는 앞만
+            보고 달렸지만, 오늘은 따스한 온정을 나누어 보아요.주변을 둘러보며
+            조화롭고 유연한 태도로 행동하면, 이익도 생겨나고 조력자도 얻게 될
+            거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한 온정을 나누어
+            보아요.주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도
+            생겨나고 조력자도 얻게 될 거예요.
+          </p>
+
+          <h3 class="font-semibold">연애운</h3>
+          <p class="mt-5 max-w-500">
+            주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도 생겨나고
+            조력자도 얻게 될 거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한
+            온정을 나누어 보아요.주변을 둘러보며 조화롭고 유연한 태도로
+            행동하면, 이익도 생겨나고 조력자도 얻게 될 거예요. 평소에는 앞만
+            보고 달렸지만, 오늘은 따스한 온정을 나누어 보아요.주변을 둘러보며
+            조화롭고 유연한 태도로 행동하면, 이익도 생겨나고 조력자도 얻게 될
+            거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한 온정을 나누어
+            보아요.주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도
+            생겨나고 조력자도 얻게 될 거예요.
+          </p>
+
+          <h3 class="font-semibold">연애운</h3>
+          <p class="mt-5 max-w-500">
+            주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도 생겨나고
+            조력자도 얻게 될 거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한
+            온정을 나누어 보아요.주변을 둘러보며 조화롭고 유연한 태도로
+            행동하면, 이익도 생겨나고 조력자도 얻게 될 거예요. 평소에는 앞만
+            보고 달렸지만, 오늘은 따스한 온정을 나누어 보아요.주변을 둘러보며
+            조화롭고 유연한 태도로 행동하면, 이익도 생겨나고 조력자도 얻게 될
+            거예요. 평소에는 앞만 보고 달렸지만, 오늘은 따스한 온정을 나누어
+            보아요.주변을 둘러보며 조화롭고 유연한 태도로 행동하면, 이익도
+            생겨나고 조력자도 얻게 될 거예요.
+          </p>
+          <div class="flex jc">
+            <div
+              class="bg-rose-100 p-10 rounded-lg flex jc gap-10 shadow-xl wa"
+            >
+              <img src="/images/dog.webp" width="200px" />
+              <div class="text-zinc-700 flex flex-col gap-10">
+                <span class="text-xl font-semibold">운세를 공유해보세요</span>
+                <div class="flex ic gap-5">
+                  <span
+                    class="text-zinc-500 bg-white p-5 rounded-2xl cursor-pointer"
+                    >http://lasdasdadqwwe:f141dqqwe</span
+                  >
+                  <div class="bg-emerald-300 w-10 h-10 rounded-full flex ic jc">
+                    <i
+                      class="fa-solid fa-check text-white font-bold text-xl"
+                    ></i>
+                  </div>
+                </div>
+                <button class="py-3 rounded-lg bg-white b">
+                  주소 복사하기
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="chart.js"></script>
+  <script src="app.js"></script>
+</html>
