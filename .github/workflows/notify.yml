@@ -6,6 +6,16 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Send notification to Microsoft 365
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Notify on Push
+        if: github.event_name == 'push'
         run: |
-          curl -H 'Content-Type: application/json' -d '{"text": "새로운 커밋 발생"}' https://o365kopo.webhook.office.com/webhookb2/1cd0ea02-e65b-4af7-bf9a-a42e37ce31d2@ad21525c-fc0f-4dbc-a403-67ce00add0e4/IncomingWebhook/e5cebc81a54c49a6894a1260a5ac5bba/f148149e-e673-46b0-9b2e-078bde1fc819
+          curl -H "Content-Type: application/json" -d "{\"text\": \"🔔 New Push to Main: ${GITHUB_REF} by ${GITHUB_ACTOR}. Commit message: '${{ github.event.commits[0].message }}'.\"}" ${{ secrets.M365_WEBHOOK_URL }}
+        env:
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_ACTOR: ${{ github.actor }}
+      - name: Notify on Pull Request
+        if: github.event_name == 'pull_request'
+        run: |
+          curl -H "Content-Type: application/json" -d "{\"text\": \"🔔 Pull Request Event: ${{ github.event.pull_request.title }} by ${{ github.event.pull_request.user.login }}. Action: ${{ github.event.action }}, URL: ${{ github.event.pull_request.html_url }}.\"}" ${{ secrets.M365_WEBHOOK_URL }}
