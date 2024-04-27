@@ -3,9 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>정보입력페이지</title>
+    <link rel="stylesheet" href="input.module.css">
+    <!-- jQuery 및 jQuery Ripples 라이브러리 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
+    <style>
+        /* 이미지를 화면에 꽉 채우는 스타일 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* 화면 스크롤 가능하도록 설정 */
+        }
+        /* 이미지 컨테이너의 스타일 */
+        #image-container {
+            width: 100%;
+            height: 100%;
+            background: url('bg.png') center center no-repeat;
+            background-size: cover;
+            position: relative; /* 물결 효과를 위해 필요 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 물결 효과를 나타낼 div의 스타일 */
+        .ripples {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* 물결 효과 div에 이벤트가 전달되지 않도록 설정 */
+        }
+    </style>
 </head>
 <body>
-    
+
+<!-- 이미지가 들어갈 컨테이너 -->
+<div id="image-container">
+    <!-- 물결 효과를 나타낼 div -->
+    <div class="ripples"></div>
+    <div class="card spaceInUp" id="card">
+        <div class="card-inner">
+            <div class="card-front">
+                <div class="card-heading">4조팔자 서비스<br>성명 입력란</div>
+                <div class="card-content"><pr>이름을 입력해주세요:)</pr></div>
+                <div class="card-placeholder">입력란</div>
+                <div><input type="text" id="nameInput" placeholder="이름을 입력해주세요"></div>
+                <div class="card-buttons">
+                    <button id="goBackButton">
+                        <a href="testtttttt.html">돌아가기</a></button>
+                    <button id="nextButton">다음</button>
+                </div>
+            </div>
+            <div class="card-back">
+                <div class="card-heading">4조팔자 서비스<br>
+                    <span id="userName"></span></div>
+                <div class="card-content">선택란</div>
+                <div>
+                    <label for="birthDate">생년월일:</label>
+                    <input type="date" id="birthDate">
+                </div>
+                <div>
+                    <label for="birthTime">태어난 시간:</label>
+                    <select id="birthTime">
+                        <option value="미응답">선택하기</option>
+                        <option value="미입력">태어난 시간 모름</option>
+                        <option value="자시">밤 11시 30분 ~ 새벽 1시 30분</option>
+                        <option value="축시">새벽 1시 30분 ~ 새벽 3시 30분</option>
+                        <option value="인시">새벽 3시 30분 ~ 새벽 5시 30분</option>
+                        <option value="묘시">새벽 5시 30분 ~ 오전 7시 30분</option>
+                        <option value="진시">오전 7시 30분 ~ 오전 9시 40분</option>
+                        <option value="사시">오전 9시 30분 ~ 오전 11시 30분</option>
+                        <option value="오시">오전 11시 30분 ~ 오후 1시 30분</option>
+                        <option value="미시">오후 1시 30분 ~ 오후 3시 30분</option>
+                        <option value="신시">오후 3시 30분 ~ 오후 5시 30분</option>
+                        <option value="유시">오후 5시 30분 ~ 저녁 7시 30분</option>
+                        <option value="술시">저녁 7시 30분 ~ 밤 9시 30분</option>
+                        <option value="해시">밤 9시 30분 ~ 밤 11시 30분</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="radio" id="solar" name="calendar" value="양력">
+                    <label for="solar">양력</label>
+                    <input type="radio" id="lunar" name="calendar" value="음력">
+                    <label for="lunar">음력</label>
+                </div>
+                <div class="card-buttons">
+                    <button id="goBackButton">
+                        <a href="testtttttt.html">돌아가기</a></button>
+                    <button id="finalCompleteButton">
+                        <a href="loading.html">완료</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var nextButton = document.getElementById('nextButton');
+        var flipCard = document.getElementById('card');
+
+        nextButton.addEventListener('click', function() {
+            flipCard.classList.add('flipped');
+            var nameInput = document.getElementById('nameInput').value;
+            var userName = document.getElementById('userName');
+            userName.textContent = nameInput + '님의 기본 정보를 선택해주세요:)';
+        });
+
+        var finalCompleteButton = document.getElementById('finalCompleteButton');
+
+        finalCompleteButton.addEventListener('click', function() {
+            var name = document.getElementById('nameInput').value;
+            var birthDate = document.getElementById('birthDate').value;
+            var birthTime = document.getElementById('birthTime').value;
+            var calendar = document.querySelector('input[name="calendar"]:checked').value;
+
+            var userInfo = {
+                'name': name,
+                'birthDate': birthDate,
+                'birthTime': birthTime,
+                'calendar': calendar
+            };
+
+            // 페이지 로딩 후 입력된 정보를 로컬 스토리지에 저장
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        });
+
+    });
+</script>
+
 </body>
 </html>
