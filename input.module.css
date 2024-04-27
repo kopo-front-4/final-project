@@ -1,0 +1,103 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+@keyframes spaceInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+        -webkit-transform: scale(0.2) translate(0%, -200%);
+        transform: scale(0.2) translate(0%, -200%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+        -webkit-transform: scale(1) translate(0%, 0%);
+        transform: scale(1) translate(0%, 0%);
+    }
+}
+
+.spaceInUp {
+    animation-name: spaceInUp;
+    animation-duration: 2s; /* 애니메이션 지속 시간 설정 */
+    animation-timing-function: ease; /* 애니메이션 타이밍 함수 설정 */
+    animation-fill-mode: both; /* 애니메이션 상태 유지 설정 */
+}
+
+.card {
+    width: 450px;
+    height: 700px;
+    perspective: 1000px;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    transform: rotateY(0deg);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    color: black; /* 입력한 내용은 검은색 */
+    text-align: center; /* 텍스트를 가운데 정렬 */
+}
+
+input[type="text"]::placeholder {
+    color: rgb(255, 106, 0); /* placeholder는 주황색 */
+    text-align: center; /* placeholder를 가운데 정렬 */
+    /* 추가된 스타일 */
+    width: 100%;
+}
+
+button {
+    padding: 8px 50px;
+    margin: 0 8px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ddd;
+}
