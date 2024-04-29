@@ -1,0 +1,24 @@
+.imageContainer {
+  background: url("../assets/bg2.jpg") center center no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imageContainer > button {
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.imageContainer > img {
+  transition: 500ms ease;
+}
+
+.imageContainer > img:hover {
+  transform: scale(1.1);
+}
