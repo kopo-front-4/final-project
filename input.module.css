@@ -1,3 +1,4 @@
+/* 이미지를 화면에 꽉 채우는 스타일 */
 body, html {
     height: 100%;
     margin: 0;
@@ -7,30 +8,23 @@ body, html {
     background-color: #f0f0f0;
 }
 
-@keyframes spaceInUp {
+/* 애니메이션 효과 */
+@keyframes puffIn {
     0% {
         opacity: 0;
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-        -webkit-transform: scale(0.2) translate(0%, -200%);
-        transform: scale(0.2) translate(0%, -200%);
+        transform-origin: 50% 50%;
+        transform: scale(2, 2);
+        filter: blur(2px);
     }
     100% {
         opacity: 1;
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-        -webkit-transform: scale(1) translate(0%, 0%);
-        transform: scale(1) translate(0%, 0%);
+        transform-origin: 50% 50%;
+        transform: scale(1, 1);
+        filter: blur(0px);
     }
 }
 
-.spaceInUp {
-    animation-name: spaceInUp;
-    animation-duration: 2s; /* 애니메이션 지속 시간 설정 */
-    animation-timing-function: ease; /* 애니메이션 타이밍 함수 설정 */
-    animation-fill-mode: both; /* 애니메이션 상태 유지 설정 */
-}
-
+/* 카드 스타일 */
 .card {
     width: 450px;
     height: 700px;
@@ -56,9 +50,11 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.65);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
     position: absolute;
     backface-visibility: hidden;
 }
@@ -71,6 +67,7 @@ body, html {
     transform: rotateY(180deg);
 }
 
+/* 입력 필드 스타일 */
 input[type="text"] {
     width: 80%;
     padding: 8px;
@@ -78,26 +75,53 @@ input[type="text"] {
     border: 1px solid #ccc;
     margin-bottom: 12px;
     box-sizing: border-box;
-    color: black; /* 입력한 내용은 검은색 */
-    text-align: center; /* 텍스트를 가운데 정렬 */
+    color: black;
+    text-align: center;
 }
 
-input[type="text"]::placeholder {
-    color: rgb(255, 106, 0); /* placeholder는 주황색 */
-    text-align: center; /* placeholder를 가운데 정렬 */
-    /* 추가된 스타일 */
-    width: 100%;
-}
-
+/* 버튼 스타일 */
 button {
     padding: 8px 50px;
     margin: 0 8px;
     border-radius: 4px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 }
 
 button:hover {
     background-color: #ddd;
+}
+
+/* Press Enter to Start 문구 스타일 */
+#start-text {
+    position: absolute;
+    bottom: 110px;
+    left: 45%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #ffffff;
+}
+
+#start-text:hover {
+    transform: scale(1.1) translateY(3px);
+    transition: transform 0.5s ease;
+}
+
+/* 로고 이미지 호버 효과 */
+#logo:hover {
+    transform: scale(1.1) translateY(10px);
+    transition: transform 0.5s ease;
+}
+
+/* 로고 이미지 호버가 아닐 때 원래 크기로 복원 */
+#logo:not(:hover) {
+    transform: scale(1) translateY(0);
+    transition: transform 1s ease;
+}
+
+/* 로고 이미지 호버가 아닐 때 Press Enter to Start 문구 원래 크기로 복원 */
+#start-text:not(:hover) {
+    transform: scale(1) translateY(0);
+    transition: transform 0.5s ease;
 }
