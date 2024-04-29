@@ -29,8 +29,5 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('birthTime', birthTime);
         localStorage.setItem('calendar', calendar);
 
-        // 여기에 추가적으로 필요한 정보 저장
-
-        // 저장 후 페이지 이동 또는 다른 동작 수행
     });
 });
