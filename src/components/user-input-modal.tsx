@@ -1,6 +1,8 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./userInputModal.module.css";
 import { Link } from "react-router-dom";
+import { MdSunny } from "react-icons/md";
+import { FaMoon } from "react-icons/fa6";
 
 interface UserInputModalProps {
   start: boolean;
@@ -13,6 +15,10 @@ export const UserInputModal = ({ closeModal, start }) => {
   const [birthDate, setBirthDate] = useState("");
   const [birthTime, setBirthTime] = useState("");
   const [isSolar, setIsSolar] = useState(true);
+
+  useEffect(() => {
+    console.log(isSolar);
+  }, [isSolar]);
 
   return (
     <section
@@ -84,17 +90,59 @@ export const UserInputModal = ({ closeModal, start }) => {
               </select>
             </div>
           </div>
-          <div>
-            <input
-              type="radio"
-              id="solar"
-              name="calendar"
-              value="양력"
-              checked
-            />
-            <label htmlFor="solar">양력</label>
-            <input type="radio" id="lunar" name="calendar" value="음력" />
-            <label htmlFor="lunar">음력</label>
+          <div className="w-full flex gap-20 justify-center">
+            <div className="flex items-center">
+              <input
+                type="radio"
+                id="solar"
+                name="calendar"
+                value="양력"
+                checked={isSolar}
+                className="hidden"
+                onChange={() => {
+                  setIsSolar(true);
+                }}
+              />
+              <label
+                htmlFor="solar"
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <div
+                  className={`h-7 w-7 bg-white flex items-center justify-center rounded-full ${
+                    isSolar && "check-check"
+                  }`}
+                >
+                  <MdSunny className="text-black text-2xl" />
+                </div>
+                양력
+              </label>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="radio"
+                id="lunar"
+                name="calendar"
+                value="음력"
+                className="hidden"
+                onChange={() => {
+                  setIsSolar(false);
+                }}
+                checked={!isSolar}
+              />
+              <label
+                htmlFor="lunar"
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <div
+                  className={`h-7 w-7 bg-white flex items-center justify-center rounded-full  ${
+                    !isSolar && "check-check"
+                  }`}
+                >
+                  <FaMoon className="text-black text-xl" />
+                </div>
+                음력
+              </label>
+            </div>
           </div>
 
           <div className="w-full flex justify-between">

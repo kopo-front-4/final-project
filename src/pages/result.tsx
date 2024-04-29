@@ -7,6 +7,16 @@ import { Sidenav } from "../components/side-nav";
 import { Background } from "../model/background";
 import { Description } from "../components/description";
 import { Header } from "../components/header";
+import { useParams, useSearchParams } from "react-router-dom";
+import { customDecodeUrl } from "../hooks/decodeUrl";
+import {
+  daily,
+  fortune1,
+  fortune2,
+  fortune3,
+  fortune4,
+  fortune5,
+} from "../constants";
 
 const ResultPage = () => {
   const [idx, setIdx] = useState(0);
@@ -22,46 +32,60 @@ const ResultPage = () => {
   const [isSouthHemisphere, setIsSouthHemisphere] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
 
+  let [searchParams, setSearchParams] = useSearchParams();
+  const code = searchParams.get("code");
+  const decodedCode = customDecodeUrl(code);
+  if (decodedCode == null) {
+    //404로 보내버림
+  }
+
+  const d = daily[decodedCode![0]];
+  const f1 = fortune1[decodedCode![1]];
+  const f2 = fortune2[decodedCode![2]];
+  const f3 = fortune3[decodedCode![3]];
+  const f4 = fortune4[decodedCode![4]];
+  const f5 = fortune5[decodedCode![5]];
+
   const rs = [
     {
       title: "총운",
-      message:
-        "긍정적인 생각이 좋은 기운을 부르는 하루입니다. 작은 빗방울이 모여 큰 비를 만들 듯, 조금 더디더라도 꾸준히 노력한다면 애쓴 만큼의 결과를 얻을 수 있을 것입니다. 목표의식을 상기하고 조금씩 조금씩 나아가시기 바랍니다. 여정의 고단함에 발검음을 멈춘다면 아무 소득 없이 지나온 길을 되돌아갈 뿐입니다. 심기일전하여 차분히 걸어가면 기대하던 목적지에 다다를 수 있을 것입니다. 눈에 보이는 이익을 좇기보다는 마음의 건강에 집중해보십시오. 단, 오늘은 생활반경에서 벗어나 멀리 이동하는 것이 바람직하지 않습니다. 가급적이면 먼 곳으로 떠나는 일을 피해야 하고 어쩔 수 없는 경우라면 발생 가능한 문제들에 미리 대비해야겠습니다.",
+      score: d.score,
+      message: d.message,
       phi: 0,
       theta: 0,
     },
     {
       title: "재물운",
-      message:
-        "긍정적인 생각이 좋은 기운을 부르는 하루입니다. 작은 빗방울이 모여 큰 비를 만들 듯, 조금 더디더라도 꾸준히 노력한다면 애쓴 만큼의 결과를 얻을 수 있을 것입니다. 목표의식을 상기하고 조금씩 조금씩 나아가시기 바랍니다. 여정의 고단함에 발검음을 멈춘다면 아무 소득 없이 지나온 길을 되돌아갈 뿐입니다. 심기일전하여 차분히 걸어가면 기대하던 목적지에 다다를 수 있을 것입니다. 눈에 보이는 이익을 좇기보다는 마음의 건강에 집중해보십시오. 단, 오늘은 생활반경에서 벗어나 멀리 이동하는 것이 바람직하지 않습니다. 가급적이면 먼 곳으로 떠나는 일을 피해야 하고 어쩔 수 없는 경우라면 발생 가능한 문제들에 미리 대비해야겠습니다.",
+      score: f1.score,
+      message: f1.message,
       phi: 0,
       theta: 0,
     },
     {
       title: "연애운",
-      message:
-        "긍정적인 생각이 좋은 기운을 부르는 하루입니다. 작은 빗방울이 모여 큰 비를 만들 듯, 조금 더디더라도 꾸준히 노력한다면 애쓴 만큼의 결과를 얻을 수 있을 것입니다. 목표의식을 상기하고 조금씩 조금씩 나아가시기 바랍니다. 여정의 고단함에 발검음을 멈춘다면 아무 소득 없이 지나온 길을 되돌아갈 뿐입니다. 심기일전하여 차분히 걸어가면 기대하던 목적지에 다다를 수 있을 것입니다. 눈에 보이는 이익을 좇기보다는 마음의 건강에 집중해보십시오. 단, 오늘은 생활반경에서 벗어나 멀리 이동하는 것이 바람직하지 않습니다. 가급적이면 먼 곳으로 떠나는 일을 피해야 하고 어쩔 수 없는 경우라면 발생 가능한 문제들에 미리 대비해야겠습니다.",
+      score: f2.score,
+      message: f2.message,
       phi: 0,
       theta: 0,
     },
     {
       title: "사업운",
-      message:
-        "긍정적인 생각이 좋은 기운을 부르는 하루입니다. 작은 빗방울이 모여 큰 비를 만들 듯, 조금 더디더라도 꾸준히 노력한다면 애쓴 만큼의 결과를 얻을 수 있을 것입니다. 목표의식을 상기하고 조금씩 조금씩 나아가시기 바랍니다. 여정의 고단함에 발검음을 멈춘다면 아무 소득 없이 지나온 길을 되돌아갈 뿐입니다. 심기일전하여 차분히 걸어가면 기대하던 목적지에 다다를 수 있을 것입니다. 눈에 보이는 이익을 좇기보다는 마음의 건강에 집중해보십시오. 단, 오늘은 생활반경에서 벗어나 멀리 이동하는 것이 바람직하지 않습니다. 가급적이면 먼 곳으로 떠나는 일을 피해야 하고 어쩔 수 없는 경우라면 발생 가능한 문제들에 미리 대비해야겠습니다.",
+      score: f3.score,
+      message: f3.message,
       phi: 0,
       theta: 0,
     },
     {
       title: "건강운",
-      message:
-        "긍정적인 생각이 좋은 기운을 부르는 하루입니다. 작은 빗방울이 모여 큰 비를 만들 듯, 조금 더디더라도 꾸준히 노력한다면 애쓴 만큼의 결과를 얻을 수 있을 것입니다. 목표의식을 상기하고 조금씩 조금씩 나아가시기 바랍니다. 여정의 고단함에 발검음을 멈춘다면 아무 소득 없이 지나온 길을 되돌아갈 뿐입니다. 심기일전하여 차분히 걸어가면 기대하던 목적지에 다다를 수 있을 것입니다. 눈에 보이는 이익을 좇기보다는 마음의 건강에 집중해보십시오. 단, 오늘은 생활반경에서 벗어나 멀리 이동하는 것이 바람직하지 않습니다. 가급적이면 먼 곳으로 떠나는 일을 피해야 하고 어쩔 수 없는 경우라면 발생 가능한 문제들에 미리 대비해야겠습니다.",
+      score: f4.score,
+      message: f4.message,
       phi: 0,
       theta: 0,
     },
     {
       title: "학업운",
-      message:
-        "긍정적인 생각이 좋은 기운을 부르는 하루입니다. 작은 빗방울이 모여 큰 비를 만들 듯, 조금 더디더라도 꾸준히 노력한다면 애쓴 만큼의 결과를 얻을 수 있을 것입니다. 목표의식을 상기하고 조금씩 조금씩 나아가시기 바랍니다. 여정의 고단함에 발검음을 멈춘다면 아무 소득 없이 지나온 길을 되돌아갈 뿐입니다. 심기일전하여 차분히 걸어가면 기대하던 목적지에 다다를 수 있을 것입니다. 눈에 보이는 이익을 좇기보다는 마음의 건강에 집중해보십시오. 단, 오늘은 생활반경에서 벗어나 멀리 이동하는 것이 바람직하지 않습니다. 가급적이면 먼 곳으로 떠나는 일을 피해야 하고 어쩔 수 없는 경우라면 발생 가능한 문제들에 미리 대비해야겠습니다.",
+      score: f5.score,
+      message: f5.message,
       phi: 0,
       theta: 0,
     },
