@@ -1,28 +1,27 @@
 aside {
   position: fixed;
-  height: 100%;
-  min-height: 800px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  width: 100%;
   gap: 2.5rem; /* 40px */
   left: 2.5rem; /* 40px */
   z-index: 90;
+  bottom: 20px;
 }
 
-aside > * input {
+aside > div {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 
   height: 1.25rem; /* 20px */
   width: 1.25rem; /* 20px */
-  background-color: white;
   cursor: pointer;
   transition: 300ms;
 }
 
-aside > * input:hover {
+aside > div:hover {
   box-shadow: 0 0 0 0.5rem rgba(255, 255, 255, 0.5);
 }
 
@@ -31,23 +30,25 @@ aside > * input:hover {
 } */
 
 aside > div {
-  padding: 5px 0;
+  /* padding: 5px 5px;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: white;
   font-weight: bold;
-  position: relative;
+  position: relative; */
 }
 
 aside > * label {
-  transition: 300ms;
-  opacity: 0;
-  margin-left: -50px;
-  padding-left: 10px;
+  display: none;
+  /* transition: 300ms; */
+  /* opacity: 0; */
+  /* margin-left: -50px; */
+  /* padding-left: 10px; */
 }
 
 /* aside > * input:checked + label, */
 aside > * input:hover + label {
-  opacity: 100%;
-  margin-left: 0px;
+  /* opacity: 100%; */
+  /* margin-left: 0px; */
 }

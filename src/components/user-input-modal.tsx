@@ -1,24 +1,69 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./userInputModal.module.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MdSunny } from "react-icons/md";
 import { FaMoon } from "react-icons/fa6";
 
 interface UserInputModalProps {
   start: boolean;
-  closeModal: Dispatch<SetStateAction<boolean>>;
+  closeModal: () => void;
 }
 
-export const UserInputModal = ({ closeModal, start }) => {
+export const UserInputModal: React.FC<UserInputModalProps> = ({
+  closeModal,
+  start,
+}) => {
+  const navigate = useNavigate();
   const [flipped, setFlipped] = useState(false);
-  const [username, setUsername] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [birthTime, setBirthTime] = useState("");
+  const [name, setName] = useState<string | null>(null);
+  const [birthDate, setBirthDate] = useState<string | null>(null);
+  const [birthTime, setBirthTime] = useState<string | null>(null);
   const [isSolar, setIsSolar] = useState(true);
 
-  useEffect(() => {
-    console.log(isSolar);
-  }, [isSolar]);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorMessageDate, setErrorMessageDate] = useState(false);
+  const [errorMessageTime, setErrorMessageTime] = useState(false);
+
+  const handleSubmit = () => {
+    let isValid = true;
+    if (birthDate == null || birthDate.trim() == "") {
+      setErrorMessageDate(true);
+      isValid = false;
+    }
+    if (birthTime == null || birthTime.trim() == "") {
+      setErrorMessageTime(true);
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    const obj = {
+      name,
+      birthDate,
+      birthTime,
+      isSolar,
+    };
+    localStorage.setItem("userInfo", JSON.stringify(obj));
+    return navigate("/loading");
+  };
+
+  const handleClose = () => {
+    setName(null);
+    setBirthDate(null);
+    setBirthTime(null);
+    setIsSolar(true);
+    closeModal();
+  };
+
+  const handleNext = () => {
+    if (name == null || name.trim() == "") {
+      setErrorMessage(true);
+      return;
+    }
+
+    setErrorMessage(false);
+    setFlipped(true);
+  };
 
   return (
     <section
@@ -45,13 +90,14 @@ export const UserInputModal = ({ closeModal, start }) => {
               id="nameInput"
               placeholder="이름을 입력해주세요"
               onChange={(e) => {
-                setUsername(e.target.value);
+                setName(e.target.value);
               }}
             />
+            {errorMessage && "이름을 비워두실 수 없습니다."}
           </div>
           <div className="w-full flex justify-between">
-            <button onClick={closeModal}>Back</button>
-            <button onClick={() => setFlipped(true)}>Next</button>
+            <button onClick={() => handleClose()}>Back</button>
+            <button onClick={() => handleNext()}>Next</button>
           </div>
         </div>
         <div
@@ -61,18 +107,28 @@ export const UserInputModal = ({ closeModal, start }) => {
         >
           <hgroup>
             <h2>Fortune</h2>
-            <h2>{username}님의 기본 정보를 선택해주세요:</h2>
+            <h2>{name}님의 기본 정보를 선택해주세요:</h2>
           </hgroup>
 
           <div>선택란</div>
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="birthDate">생년월일:</label>
-            <input type="date" id="birthDate" />
+            <input
+              type="date"
+              id="birthDate"
+              onChange={(e) => {
+                setBirthDate(e.target.value);
+              }}
+            />
+            <span>{errorMessageDate && "항목을 비워두실 수 없습니다."}</span>
           </div>
           <div>
             <div className="w-full flex flex-col items-center justify-center">
               <label htmlFor="birthTime">태어난 시간:</label>
-              <select className="text-black py-2 rounded-lg w-full">
+              <select
+                className="text-black py-2 rounded-lg w-full"
+                onChange={(e) => setBirthTime(e.target.value)}
+              >
                 <option value="미응답">선택하기</option>
                 <option value="미입력">태어난 시간 모름</option>
                 <option value="자시">밤 11시 30분 ~ 새벽 1시 30분</option>
@@ -88,6 +144,7 @@ export const UserInputModal = ({ closeModal, start }) => {
                 <option value="술시">저녁 7시 30분 ~ 밤 9시 30분</option>
                 <option value="해시">밤 9시 30분 ~ 밤 11시 30분</option>
               </select>
+              <span>{errorMessageTime && "항목을 비워두실 수 없습니다."}</span>
             </div>
           </div>
           <div className="w-full flex gap-20 justify-center">
@@ -108,8 +165,8 @@ export const UserInputModal = ({ closeModal, start }) => {
                 className="flex items-center gap-2 cursor-pointer"
               >
                 <div
-                  className={`h-7 w-7 bg-white flex items-center justify-center rounded-full ${
-                    isSolar && "check-check"
+                  className={`h-7 w-7 flex items-center justify-center rounded-full ${
+                    isSolar ? "bg-green-400" : "bg-white"
                   }`}
                 >
                   <MdSunny className="text-black text-2xl" />
@@ -134,8 +191,8 @@ export const UserInputModal = ({ closeModal, start }) => {
                 className="flex items-center gap-2 cursor-pointer"
               >
                 <div
-                  className={`h-7 w-7 bg-white flex items-center justify-center rounded-full  ${
-                    !isSolar && "check-check"
+                  className={`h-7 w-7  flex items-center justify-center rounded-full  ${
+                    isSolar ? "bg-white" : "bg-green-400"
                   }`}
                 >
                   <FaMoon className="text-black text-xl" />
@@ -146,12 +203,8 @@ export const UserInputModal = ({ closeModal, start }) => {
           </div>
 
           <div className="w-full flex justify-between">
-            <button onClick={() => setFlipped(false)} className="">
-              Return
-            </button>
-            <button onClick={() => setFlipped(true)} className="">
-              <Link to="/loading">Next</Link>
-            </button>
+            <button onClick={() => setFlipped(false)}>Return</button>
+            <button onClick={() => handleSubmit()}>Next</button>
           </div>
         </div>
       </article>
@@ -165,7 +218,7 @@ export const UserInputModal = ({ closeModal, start }) => {
   <br />
   FOURTUNE
   <br />
-  <span id="userName"></span>
+  <span id="name"></span>
 </div>
 <div className="card-content">선택란</div>
 <div>

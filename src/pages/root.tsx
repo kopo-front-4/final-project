@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import styles from "./root.module.css";
 import { useState } from "react";
 import { UserInputModal } from "../components/user-input-modal";
 
@@ -7,21 +5,25 @@ const RootPage = () => {
   const [start, setStart] = useState(false);
 
   return (
-    <main className={styles.imageContainer}>
-      <div className={styles.ripples}></div>
+    <>
       {start && (
         <UserInputModal closeModal={() => setStart(false)} start={start} />
       )}
 
       <img
-        src="fourTUNE.png"
+        src="images/fourTUNE.png"
         alt="Logo"
-        className={`${start ? "opacity-0" : "opacity-100"}`}
+        className={`${
+          start ? "opacity-0" : "opacity-100"
+        } hover:scale-110 duration-500 ease-in-out`}
       />
-      <button onClick={() => setStart(true)}>
+      <button
+        onClick={() => setStart(true)}
+        className="text-white text-4xl font-bold z-20"
+      >
         {!start && "Press Enter to Start"}
       </button>
-    </main>
+    </>
   );
 };
 

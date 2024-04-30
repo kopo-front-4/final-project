@@ -1,13 +1,27 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState } from "react";
+import * as THREE from "three";
 import { CustomOrbitControls } from "../model/custom-orbit-controls";
-import { Stars } from "@react-three/drei";
+import {
+  DragControls,
+  OrbitControls,
+  OrthographicCamera,
+  PerspectiveCamera,
+  PivotControls,
+  PresentationControls,
+  Stars,
+} from "@react-three/drei";
 import { World } from "../model/world";
 import { Sidenav } from "../components/side-nav";
 import { Background } from "../model/background";
 import { Description } from "../components/description";
 import { Header } from "../components/header";
-import { useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { customDecodeUrl } from "../hooks/decodeUrl";
 import {
   daily,
@@ -17,8 +31,10 @@ import {
   fortune4,
   fortune5,
 } from "../constants";
+import { MdFlipCameraAndroid } from "react-icons/md";
 
 const ResultPage = () => {
+  const navigate = useNavigate();
   const [idx, setIdx] = useState(0);
   const [hover, setHover] = useState(-1);
   const [visited, setVisited] = useState([
@@ -32,11 +48,19 @@ const ResultPage = () => {
   const [isSouthHemisphere, setIsSouthHemisphere] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
 
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
   const code = searchParams.get("code");
+
+  // 운세 코드가 없을 경우 에러 페이지로 리다이렉트
+  if (code == null || code.length != 6) {
+    return navigate("/error");
+  }
+
   const decodedCode = customDecodeUrl(code);
-  if (decodedCode == null) {
-    //404로 보내버림
+
+  // 운세 코드가 잘못 되었을 경우 에러 페이지로 리다이렉트
+  if (decodedCode == null || decodedCode.length != 6) {
+    return navigate("/error");
   }
 
   const d = daily[decodedCode![0]];
@@ -92,7 +116,7 @@ const ResultPage = () => {
   ];
 
   return (
-    <main className="h-screen w-screen bg-black">
+    <main className="relative">
       <Header />
       <Sidenav
         setIdx={setIdx}
@@ -100,18 +124,12 @@ const ResultPage = () => {
         setIsMoving={setIsMoving}
         visited={visited}
       />
-      <button
-        className="absolute top-10 text-white z-20"
-        onClick={() => setIsSouthHemisphere((cur) => !cur)}
-      >
-        {`${isSouthHemisphere ? "북반구" : "남반구"}`} 보기
-      </button>
-      <Description hover={hover} fortunes={rs} />
-      <Canvas camera={{ near: 1, far: 1000 }}>
-        <Suspense fallback={null}>
+      <div className="w-[50vw] h-screen absolute z-20 right-0">
+        <Canvas>
           <directionalLight />
           <ambientLight />
           <hemisphereLight />
+
           <CustomOrbitControls
             phi={rs[idx].phi}
             theta={rs[idx].theta}
@@ -124,10 +142,40 @@ const ResultPage = () => {
             hover={hover}
             setVisited={setVisited}
           />
-          <Background />
-          {/* <Stars /> */}
-        </Suspense>
-      </Canvas>
+        </Canvas>
+      </div>
+      <section className="w-[50vw] h-screen absolute z-20 left-0">
+        <Description hover={hover} fortunes={rs} />
+      </section>
+
+      <div className="absolute top-0 h-screen w-screen z-10">
+        <Canvas camera={{ near: 0.1, far: 1000 }}>
+          <Suspense fallback={null}>
+            <directionalLight />
+            <OrbitControls
+              autoRotate={true}
+              enableRotate={!isMoving}
+              autoRotateSpeed={0.2}
+            />
+            <ambientLight />
+            <hemisphereLight />
+            <Background />
+            <Stars />
+          </Suspense>
+        </Canvas>
+      </div>
+      <button
+        onClick={() => setIsSouthHemisphere((cur) => !cur)}
+        className="fixed left-20 bottom-20 duration-300 p-5 z-30"
+      >
+        <MdFlipCameraAndroid className="text-4xl font-bold text-white hover:rotate-90 duration-300" />
+      </button>
+      <Link
+        to={`/after-service?code=${code}`}
+        className="p-3 glass text-zinc-700 tracking-wide fixed right-20 bottom-20 rounded-full cursor-pointer z-20 hover:text-zinc-700/70 duration-150"
+      >
+        행운의 아이템 보러가기
+      </Link>
     </main>
   );
 };

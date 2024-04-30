@@ -1,10 +1,11 @@
 header {
   position: fixed;
-  top: 1.25rem;
+  top: 2.5rem;
   z-index: 20;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   width: 100%;
+  margin-left: 5rem;
 
   /* 복사금지 */
   -webkit-user-select: none;
