@@ -1,0 +1,370 @@
+.w-1 {
+  width: 0.25rem;
+}
+.w-5 {
+  width: 1.25rem; /* 20px */
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-11 {
+  width: 2.75rem;
+}
+.w-2 {
+  width: 0.5rem;
+}
+.w-3 {
+  width: 0.75rem;
+}
+.w-4 {
+  width: 1rem;
+}
+.w-5 {
+  width: 1.25rem;
+}
+.w-8 {
+  width: 2rem;
+}
+.w-60 {
+  width: 15rem;
+}
+.w-96 {
+  width: 24rem;
+}
+.w-full {
+  width: 100%;
+}
+.w-80p {
+  width: 80%;
+}
+.w-60p {
+  width: 60%;
+}
+.w-40p{
+  width: 40%;
+}
+.h-24 {
+    height: 6rem;
+  }
+  .h-400-pixel {
+    height: 400px;
+  }
+  .h-45p{
+    height: 48%;
+  }
+  
+  .h-800-pixel {
+    height: 800px;
+  }
+  .h-2 {
+    height: 0.5rem;
+  }
+  .h-3 {
+    height: 0.75rem;
+  }
+  .h-4 {
+    height: 1rem;
+  }
+  .h-5 {
+    height: 1.25rem; /* 20px */
+  }
+  .h-6 {
+    height: 1.5rem; /* 24px */
+  }
+  .h-7 {
+    height: 1.75rem; /* 28px */
+  }
+  .h-8 {
+    height: 2rem; /* 32px */
+  }
+  .h-9 {
+    height: 2.25rem; /* 36px */
+  }
+  .h-10 {
+    height: 2.5rem; /* 40px */
+  }
+  .h-11 {
+    height: 2.75rem;
+  }
+  .h-12 {
+    height: 3rem;
+  }
+  .h-16 {
+    height: 4rem;
+  }
+  .h-20 {
+    height: 5rem; /* 80px */
+  }
+  
+  .h-80 {
+    height: 20rem;
+  }
+  
+  .h-60p {
+    height: 60%;
+  }
+  
+  .h-80p {
+    height: 80%;
+  }
+  
+  .h-80-pixel {
+    height: 80px;
+  }
+  
+
+  .w-500-pixel {
+    width: 500px;
+  }
+  
+  .w-600-pixel {
+    width: 600px;
+  }
+  
+  .w-10p{
+    width: 10%;
+  }
+  .w-20p{
+    width: 20%;
+  }
+  
+  /* .overflow-hidden {
+    overflow: hidden;
+  }
+  
+  .overflow-x-hidden {
+    overflow-x: hidden;
+  } */
+  
+  .mr-10 {
+      margin-right: 2.5rem; /* 40px */
+  
+  }
+  .ml-56 {
+    margin-left: 14rem;
+  }
+  .ml-60 {
+    margin-left: 15rem;
+  }
+  .p-0 {
+    padding: 0px;
+  }
+  .p-1 {
+    padding: 0.25rem;
+  }
+  .p-2 {
+    padding: 0.5rem;
+  }
+  .p-4 {
+    padding: 1rem;
+  }
+  
+  .loader-bg {
+    background: linear-gradient(180deg, #e4695e 0%, #7c0e17 100%);
+      /* background-image: url('images/bg.png'); */
+  
+  }
+  /* Hover  */
+  .hover\:bg-slate-100:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+  }
+  
+  .hover\:bg-slate-500:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+  }
+  
+  .hover\:bg-zinc-50:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(250 250 250 / var(--tw-bg-opacity));
+  }
+  
+  /* Hover  */
+  
+  @media (min-width: 640px) {
+    .sm\:flex {
+      display: flex;
+    }
+  
+    .sm\:flex-row {
+      flex-direction: row;
+    }
+  
+    .sm\:justify-end {
+      justify-content: flex-end;
+    }
+  
+    .sm\:gap-5 {
+      gap: 1.25rem;
+    }
+  }
+  
+  /* 버튼 스타일 */
+  .return-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: #f43f5e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .card {
+    position: relative;
+    perspective: 1000px;
+  }
+  .card .front,
+  .card .back {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: transform 1s;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
+  .card img {
+    width: 100%;
+    transition: all 0.6s ease 0.2s;
+    border: 7px solid #dd2c0a;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+  
+  .card .front {
+  }
+  .card .back {
+    transform: rotateY(-180deg);
+  }
+  .card figcaption {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    backface-visibility: hidden;
+    transform: translate(-50%, -50%) translateZ(100px);
+    color: #fff;
+    font-size: 20px;
+    display: block;
+    text-align: center;
+  }
+  .card figcaption h3 {
+    min-width: 200px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 24px;
+    color: black;
+  }
+  .card figcaption p {
+    font-weight: 200;
+    padding-top: 5px;
+    color: black;
+  }
+  .card img {
+    width: 400px;
+  }
+  .card:hover .front {
+    transform: rotateY(180deg);
+  }
+  .card:hover .back {
+    transform: rotateY(0);
+  }
+  
+  #randomMessage {
+    font-size: 25px;
+  }
+  #todayMessage {
+    font-size: 30px;
+  }
+  
+  
+  /* 새로운 스타일 추가 */
+  .main-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%; /* 부모 요소인 body와 main의 높이를 100%로 설정 */
+  }
+  
+  .left-section {
+    flex: 1; /* 왼쪽 섹션이 오른쪽 섹션들의 높이만큼 자동으로 늘어나도록 설정 */
+  }
+  
+  .right-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40%; /* 오른쪽 섹션들의 너비 조정 */
+    
+  }
+  
+  .glass-word {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+  
+  }
+  
+  
+  nav {
+      background: linear-gradient(to right, rgba(255, 153, 102, 0.8), rgba(255, 94, 98, 0.8)); /* 그래디언트 배경에 투명도 추가 */
+      padding: 10px 0; /* 위아래 패딩 */
+      text-align: center; /* 네비게이션 바를 가운데 정렬합니다. */
+      border-radius: 10px; /* 유리 효과를 위한 경계 반지름 */
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* 유리의 그림자 효과 */
+      animation: glassEffect 1s ease-in-out infinite alternate; /* 애니메이션 추가 */
+  }
+  
+  @keyframes glassEffect {
+      0% {
+          background-position: 0% 50%;
+      }
+      100% {
+          background-position: 100% 50%;
+      }
+  }
+  
+  nav ul {
+      list-style-type: none; /* 리스트 스타일 제거 */
+      margin: 0;
+      padding: 0;
+  }
+  
+  nav ul li {
+      display: inline-block; /* 리스트 항목을 인라인 요소로 표시 */
+      margin-right: 20px; /* 각 항목 사이 간격 조절 */
+  }
+  
+  nav ul li:last-child {
+      margin-right: 0; /* 마지막 항목의 오른쪽 여백 제거 */
+  }
+  
+  nav ul li a {
+      text-decoration: none; /* 링크의 밑줄 제거 */
+      color: #fff; /* 링크 색상 설정 */
+      font-weight: bold; /* 링크 글꼴 두껍게 설정 */
+      transition: color 0.3s; /* 색상 변경 애니메이션 */
+  }
+  
+  nav ul li a:hover {
+      color: #f9f9f9; /* 마우스 호버시 링크 색상 변경 */
+  }
+  
+
+
+
+
+
+
+
+
+  

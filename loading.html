@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./mock-tailwind.css" />
+        <link rel="stylesheet" href="./loading.module.css" />
+        <link rel="stylesheet" href="./style.css" />
+
+        <title>Loading...</title>
+        <!-- jQuery 및 jQuery Ripples 라이브러리 추가 -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
+        <style>
+            /* 이미지를 화면에 꽉 채우는 스타일 */
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto; /* 화면 스크롤 가능하도록 설정 */
+            }
+            /* 이미지 컨테이너의 스타일 */
+            #image-container {
+                position: relative;
+                width: 100%;
+                height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
+                background: url("bg2.jpg") center center no-repeat;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            /* 물결 효과를 나타낼 div의 스타일 */
+            .ripples {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                pointer-events: none; /* 물결 효과 div에 이벤트가 전달되지 않도록 설정 */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="ripples"></div>
+
+        <main class="w-full h-full flex ic jc loader-bg" id="image-container">
+            <div class="glassbc rounded-2xl h-500-pixel w-400-pixel flex ic jc">
+                <section
+                    class="glassbc h-90p w-90p rounded-2xl  flex ic jc p-10"
+                >
+                    <div id="loader-container" class="loader-container w-80p">
+                        <!-- 기존 로더 -->
+                        <div class="loader relative">
+                            <!-- 새로운 로더 -->
+                            <div class="loader-inside absolute flex ic jc">
+                                <div class="loader-reverse"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <script src="constants.js"></script>
+        <script src="calculate.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                // 문서가 준비되면 실행
+                $("#image-container").ripples({
+                    // 리플의 반복 효과 여부
+                    dropRadius: 50, // 리플 반지름 크기
+                    perturbance: 0.04, // 물결의 왜곡 정도
+                });
+            });
+            console.log(userName, "여기");
+            const loaderContainer = document.getElementById("loader-container");
+            loaderContainer.innerHTML += `<p class="text-center mt-20 text-zinc-700 text-2xl" style="color:white">${userName} 님의 운세를 분석 중입니다...</p>
+`;
+            // setTimeout(() => {
+            //     var url = `dataaccept.html`;
+            //     window.location.href = url;
+            //     localStorage.clear();
+            // }, 5000);
+        </script>
+    </body>
+</html>
