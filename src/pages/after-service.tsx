@@ -68,7 +68,7 @@ const AfterServicePage = () => {
       <div className='min-w-[620px] h-full w-full flex pt-20 items-center justify-center gap-5 min-h-[720px] text-white'>
         <div className='flex flex-col justify-between'>
           <article className='glass h-[550px]'>
-            <h2 className='font-semibold text-3xl text-center'>행운의 부적</h2>
+            <h2 className='font-semibold text-3xl text-center'>행운의 이미지</h2>
             <div
               className='w-72 relative mt-10 group max-h-[420px]'
               onMouseEnter={() => handleFlip(true)}
