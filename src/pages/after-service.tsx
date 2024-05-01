@@ -1,164 +1,147 @@
-// import { useNavigate } from "react-router-dom";
-// import {
-//   duckdamMessages,
-//   luckyColors,
-//   luckyImageFiles,
-//   luckyItems,
-// } from "../constants/colors";
-// import styles from "./after-service.module.css";
+import { useEffect, useRef, useState } from 'react';
+import { FiCopy, FiCheckCircle } from 'react-icons/fi';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { duckdamMessages, luckyImageFiles } from '../constants/colors';
 
-// import bujeok1 from "../assets/images/bujeok1.jpg";
-// import bujeok2 from "../assets/images/bujeok2.jpg";
-// import bujeok3 from "../assets/images/bujeok3.jpg";
-// import bujeok4 from "../assets/images/bujeok4.jpg";
-// import bujeok5 from "../assets/images/bujeok5.jpg";
-// import bujeok6 from "../assets/images/bujeok6.jpg";
-// import fighting from "../assets/images/fighting.png";
-// import guwonisthis from "../assets/images/guwonisthis.png";
-// import happy from "../assets/images/happy.png";
-// import laugh from "../assets/images/laugh.png";
-// import livelikethis from "../assets/images/livelikethis.png";
-// import luckyday from "../assets/images/luckyday.png";
-// import matbab from "../assets/images/matbab.png";
+const AfterServicePage = () => {
+  const navigate = useNavigate();
+  const itemsRef = useRef<HTMLDivElement>(null);
 
-// const AfterServicePage = () => {
-//   function getRandomItems(items: string[], count: number) {
-//     let selectedItem = [];
-//     while (selectedItem.length < count) {
-//       let randomIdx = Math.floor(Math.random() * items.length);
-//       let selected = items[randomIdx];
-//       if (!selectedItem.includes(selected)) {
-//         selectedItem.push(selected);
-//       }
-//     }
-//     return selectedItem;
-//   }
+  const [copy, setCopy] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [flip, setFlip] = useState(false);
+  const [curImg, setCurImg] = useState(0);
+  const [buJukIdx] = useState(Math.floor(Math.random() * 9));
+  const [dukdamIdx] = useState(Math.floor(Math.random() * duckdamMessages.length));
+  const [luckyNumber] = useState([Math.floor(Math.random() * 45) + 1, Math.floor(Math.random() * 45) + 1]);
+  const [luckyImg] = useState([
+    Math.floor(Math.random() * 25) + 1,
+    Math.floor(Math.random() * 25) + 1,
+    Math.floor(Math.random() * 25) + 1,
+    Math.floor(Math.random() * 25) + 1,
+  ]);
 
-//   const images = [
-//     bujeok1,
-//     bujeok2,
-//     bujeok3,
-//     bujeok4,
-//     bujeok5,
-//     bujeok6,
-//     fighting,
-//     guwonisthis,
-//     happy,
-//     laugh,
-//     livelikethis,
-//     luckyday,
-//     matbab,
-//   ];
+  const [searchParams] = useSearchParams();
+  const code = searchParams.get('code');
 
-//   // 이미지를 랜덤하게 선택
-//   const randomImageFile = images[Math.floor(Math.random() * 13)];
+  useEffect(() => {
+    // 운세 코드가 없을 경우 에러 페이지로 리다이렉트
+    if (code == null || code.length != 6) navigate('/error');
+  }, []);
 
-//   const navigate = useNavigate();
+  useEffect(() => {
+    setTimeout(() => setToast(false), 2000);
+  }, [toast]);
 
-//   return (
-//     <div className="flex">
-//       <section className="glass h-4/5 w-2/5 rounded-2xl shadow-xl flex2 flex-col mr-10 relative">
-//         <h2 className="text-4xl mb-10">행운 이미지</h2>
-//         <article className="w-96 h-[500px] relative flip-card">
-//           <div className="w-full h-full absolute z-20 duration-300 front rounded-2xl shadow-lg">
-//             <figure>
-//               <img
-//                 id="randomImage"
-//                 alt="lucky-image"
-//                 src={randomImageFile}
-//                 width={384}
-//                 className="rounded-2xl shadow-xl"
-//               />
-//             </figure>
-//           </div>
-//           <div className="w-full h-full absolute z-10 duration-300 back">
-//             <figure className="relative rounded-2xl  shadow-2xl">
-//               <img
-//                 src="https://syg171047-syg171047.ktcdn.co.kr/Production/preview/2011/05/25/d8105968.png"
-//                 width={384}
-//                 className=" rounded-2xl"
-//               />
-//               <figcaption className="absolute top-[20%] px-10">
-//                 <h3 className="text-3xl font-semibold text-center">
-//                   오늘의 한마디
-//                 </h3>
-//                 <p className="text-[25px] mt-10 text-center">
-//                   {
-//                     duckdamMessages[
-//                       Math.floor(Math.random() * duckdamMessages.length)
-//                     ]
-//                   }
-//                 </p>
-//               </figcaption>
-//             </figure>
-//           </div>
-//         </article>
+  const handleCopy = () => {
+    if (copy) return;
+    setCopy(true);
+    setToast(true);
+    navigator.clipboard.writeText(window.location.hostname + '/result?code=' + code);
+  };
 
-//         <button
-//           onClick={() => navigate(-1)}
-//           className="absolute bottom-5 right-5 py-2 px-5 text-white bg-[#f43f5e] border-none rounded-md"
-//         >
-//           돌아가기
-//         </button>
-//       </section>
+  const handleFlip = (val: boolean) => {
+    setFlip(val);
+  };
 
-//       <div className="right-section h-4/5">
-//         <section className="glass h-[45%] w-4/5 rounded-2xl shadow-xl flex2 flex-wrap">
-//           <div className="right-up-container w-full h-full">
-//             <div className="w-full h-1/5 flex2">
-//               <h2 className="glass w-4/5 mt-10 rounded-2xl flex2 flex-wrap shadow-xl text-2xl">
-//                 행운의 아이템
-//               </h2>
-//             </div>
-//             <div
-//               id="lucky-item-container"
-//               className="item-container w-full h-4/5 flex flex-wrap items-center justify-evenly"
-//             >
-//               {getRandomItems(luckyItems, 5).map((item, idx) => {
-//                 return (
-//                   <div
-//                     className="glass-word px-5 py-2 shadow-xl rounded-2xl m-5 flex2 text-2xl"
-//                     key={idx}
-//                   >
-//                     {item}
-//                   </div>
-//                 );
-//               })}
+  const handleItem = (action: number) => {
+    let _cur = curImg;
+    if (action == -1 && _cur > 0) _cur--;
+    if (action == 1 && _cur < 3) _cur++;
+    setCurImg(_cur);
+    if (itemsRef.current != null) itemsRef.current.style.marginLeft = '-' + _cur * 20 + 'rem';
+  };
 
-//               <div className="glass-word px-5 py-2 shadow-xl rounded-2xl m-5 flex2 text-2xl">
-//                 {luckyColors[Math.floor(Math.random() * luckyColors.length)]}
-//               </div>
-//             </div>
-//           </div>
-//         </section>
+  return (
+    <>
+      <header className='fixed top-0 pt-5 w-full flex items-center justify-center'>
+        <ul className='flex gap-20 text-2xl text-white'>
+          <li className='cursor-pointer'>
+            <Link to='/'>처음으로</Link>
+          </li>
+          <li className='cursor-pointer'>
+            <Link to={'/result?code=' + code}>운세결과</Link>
+          </li>
+        </ul>
+      </header>
+      <div className='min-w-[620px] h-full w-full flex pt-20 items-center justify-center gap-5 min-h-[720px] text-white'>
+        <div className='flex flex-col justify-between'>
+          <article className='glass h-[550px]'>
+            <h2 className='font-semibold text-3xl text-center'>행운의 부적</h2>
+            <div
+              className='w-72 relative mt-10 group max-h-[420px]'
+              onMouseEnter={() => handleFlip(true)}
+              onMouseLeave={() => handleFlip(false)}
+            >
+              <img
+                src={luckyImageFiles[buJukIdx]}
+                className={`absolute top-0 bfv duration-1000 rounded-2xl ${flip && 'flipped'}`}
+              />
+              <div
+                className={`absolute top-0 bfv duration-1000 flex items-center justify-center ${!flip && 'flipped'}`}
+              >
+                <img
+                  src='https://syg171047-syg171047.ktcdn.co.kr/Production/preview/2011/05/25/d8105968.png'
+                  className='rounded-2xl'
+                />
+                <hgroup className='absolute text-zinc-700'>
+                  <h2 className='text-2xl text-center'>오늘의 한마디</h2>
+                  <p className='mt-10 px-10 text-center'>{duckdamMessages[dukdamIdx]}</p>
+                </hgroup>
+              </div>
+            </div>
+          </article>
+          <article className='glass py-2 w-full text-3xl flex items-center justify-center mt-5'>
+            <h2 className='font-semibold text-center py-3'>공유하기</h2>
+            <div onClick={() => handleCopy()}>
+              {copy ? <FiCheckCircle className='ml-5 cursor-pointer' /> : <FiCopy className='ml-5 cursor-pointer' />}
+            </div>
+          </article>
+        </div>
+        <section className='flex flex-col gap-5 justify-center'>
+          <article className='glass flex flex-col gap-10'>
+            <h2 className='font-semibold text-3xl text-center'>행운의 아이템</h2>
+            <div className='flex items-center justify-center gap-5'>
+              <div onClick={() => handleItem(-1)} className='cursor-pointer'>
+                <FaChevronLeft />
+              </div>
+              <div className='h-80 w-80  overflow-hidden relative rounded-lg'>
+                <div ref={itemsRef} className='flex h-80 w-[100rem] duration-500'>
+                  <img src={`images/luckyitem/${luckyImg[0]}.png`} className='w-80 h-80' />
+                  <img src={`images/luckyitem/${luckyImg[1]}.png`} className='w-80 h-80' />
+                  <img src={`images/luckyitem/${luckyImg[2]}.png`} className='w-80 h-80' />
+                  <img src={`images/luckyitem/${luckyImg[3]}.png`} className='w-80 h-80' />
+                </div>
+              </div>
+              <div onClick={() => handleItem(1)} className='cursor-pointer'>
+                <FaChevronRight />
+              </div>
+            </div>
+          </article>
+          <article className='glass w-full flex flex-col items-center justify-start gap-10'>
+            <h2 className='font-semibold text-3xl text-center'>행운의 숫자</h2>
+            <div className='flex gap-10 items-center justify-center text-5xl'>
+              <span className='h-24 w-24 rounded-full bg-rose-300 text-zinc-700 flex2 hover:bg-rose-300/70 duration-300'>
+                <span className='mt-2'>{luckyNumber[0]}</span>
+              </span>
+              <span className='h-24 w-24 rounded-full bg-blue-300 text-zinc-700 flex2 hover:bg-blue-300/70 duration-300'>
+                <span className='mt-2'>{luckyNumber[1]}</span>
+              </span>
+            </div>
+          </article>
+        </section>
+      </div>
 
-//         <section className="glass h-[45%] w-[80%] rounded-2xl shadow-xl flex2">
-//           <div className="right-down-container w-full h-full flex-col items-center justify-center">
-//             <div className="w-full h-1/5 flex2">
-//               <h2 className="glass w-4/5 mt-10 rounded-2xl flex2 shadow-xl text-2xl">
-//                 행운의 숫자
-//               </h2>
-//             </div>
-//             <div
-//               id="lucky-num-container"
-//               className="item-container w-full h-4/5 flex items-center justify-evenly"
-//             >
-//               {
-//                 <>
-//                   <div className="glass-word h-20 w-1/5 shadow-xl rounded-2xl m-5 flex2 text-2xl">
-//                     {Math.floor(Math.random() * 45) + 1}
-//                   </div>
-//                   <div className="glass-word h-20 w-1/5 shadow-xl rounded-2xl m-5 flex2 text-2xl">
-//                     {Math.floor(Math.random() * 45) + 1}
-//                   </div>
-//                 </>
-//               }
-//             </div>
-//           </div>
-//         </section>
-//       </div>
-//     </div>
-//   );
-// };
+      <div
+        className={`glass fixed text-white tracking-wide right-[10%] duration-300 ${
+          toast ? 'bottom-[10%]  opacity-100 ' : '-bottom-10  opacity-0 '
+        }`}
+      >
+        복사되었습니다
+      </div>
+    </>
+  );
+};
 
-// export default AfterServicePage;
+export default AfterServicePage;

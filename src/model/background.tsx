@@ -1,11 +1,8 @@
 import { useGLTF } from "@react-three/drei";
+// @ts-expect-error
 import backgroundFinal from "../assets/3d/backgroundFinal.glb";
 
-import { useRef } from "react";
-
 export const Background = () => {
-  const bgRef = useRef();
-
   const { nodes, materials } = useGLTF(backgroundFinal);
   return (
     <group>

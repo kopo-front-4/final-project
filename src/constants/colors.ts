@@ -1,17 +1,13 @@
 export const luckyImageFiles = [
-  "../assets/images/bujeok1.jpg",
-  "../assets/images/bujeok2.jpg",
-  "../assets/images/bujeok3.jpg",
-  "../assets/images/bujeok4.jpg",
-  "../assets/images/bujeok5.jpg",
-  "../assets/images/bujeok6.jpg",
-  "../assets/images/fighting.png",
-  "../assets/images/guwonisthis.png",
-  "../assets/images/happy.png",
-  "../assets/images/laugh.png",
-  "../assets/images/livelikethis.png",
-  "../assets/images/luckyday.png",
-  "../assets/images/matbab.png",
+  "/images/fighting.png",
+  "/images/guwonisthis.png",
+  "/images/happy.png",
+  "/images/laugh.png",
+  "/images/livelikethis.png",
+  "/images/luckyday.png",
+  "/images/matbab.png",
+  "/images/todayisthis.png",
+  "/images/woojeong.png",
 ];
 
 export const duckdamMessages = [
