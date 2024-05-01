@@ -168,7 +168,7 @@ const ResultPage = () => {
         to={`/after-service?code=${code}`}
         className='p-3 glass text-zinc-700 tracking-wide fixed right-20 bottom-20 rounded-full cursor-pointer z-40 hover:text-zinc-700/70 duration-150'
       >
-        행운의 만들기
+        행운 만들기
       </Link>
     </main>
   );
