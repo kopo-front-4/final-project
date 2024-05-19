@@ -8,14 +8,12 @@ import { Background } from '../model/background';
 import { Description } from '../components/description';
 import { Header } from '../components/header';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { customDecodeUrl } from '../hooks/decodeUrl';
-import { daily, fortune1, fortune2, fortune3, fortune4, fortune5 } from '../constants';
 
 import { Fortune } from '../types';
+import axios from 'axios';
 
 const ResultPage = () => {
   const navigate = useNavigate();
-  const [mounted, setMounted] = useState(false);
   const [mouseMoved, setMouseMoved] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [idx, setIdx] = useState(0);
@@ -23,74 +21,67 @@ const ResultPage = () => {
   const [visited, setVisited] = useState([false, false, false, false, false, false]);
 
   const [isMoving, setIsMoving] = useState(false);
-  const [fortune, setFortune] = useState<Fortune[]>([]);
+  const [fortune, setFortune] = useState<Fortune[] | null>(null);
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
 
+  const fetchResult = async () => {
+    const result = await axios.get('http://localhost:8080/api/fortune?code=' + code);
+
+    if (result.status == 200) {
+      setFortune([
+        {
+          title: '총운',
+          score: result.data[0].fortune_score,
+          message: result.data[0].fortune_message,
+          phi: 0.95,
+          theta: -0.54,
+        },
+        {
+          title: '재물운',
+          score: result.data[1].fortune_score,
+          message: result.data[1].fortune_message,
+          phi: 1.01,
+          theta: 1.451,
+        },
+        {
+          title: '연애운',
+          score: result.data[2].fortune_score,
+          message: result.data[2].fortune_message,
+          phi: 1.6,
+          theta: -1.616,
+        },
+        {
+          title: '사업운',
+          score: result.data[3].fortune_score,
+          message: result.data[3].fortune_message,
+          phi: 1.647,
+          theta: 2.623,
+        },
+        {
+          title: '건강운',
+          score: result.data[4].fortune_score,
+          message: result.data[4].fortune_message,
+          phi: 2.223,
+          theta: -0.07,
+        },
+        {
+          title: '학업운',
+          score: result.data[5].fortune_score,
+          message: result.data[5].fortune_message,
+          phi: 1.792,
+          theta: -0.19,
+        },
+      ]);
+    }
+  };
+
   useEffect(() => {
-    // 운세 코드가 없을 경우 에러 페이지로 리다이렉트
     if (code == null || code.length != 6) navigate('/error');
-    const _code = customDecodeUrl(code!);
-
-    // 운세 코드가 잘못 되었을 경우 에러 페이지로 리다이렉트
-    _code.map((e) => {
-      if (e == -1) navigate('/error');
-    });
-
-    const d = daily[_code[0]];
-    const f1 = fortune1[_code[1]];
-    const f2 = fortune2[_code[2]];
-    const f3 = fortune3[_code[3]];
-    const f4 = fortune4[_code[4]];
-    const f5 = fortune5[_code[5]];
-    setFortune([
-      {
-        title: '총운',
-        score: d.score,
-        message: d.message,
-        phi: 0.95,
-        theta: -0.54,
-      },
-      {
-        title: '재물운',
-        score: f1.score,
-        message: f1.message,
-        phi: 1.01,
-        theta: 1.451,
-      },
-      {
-        title: '연애운',
-        score: f2.score,
-        message: f2.message,
-        phi: 1.6,
-        theta: -1.616,
-      },
-      {
-        title: '사업운',
-        score: f3.score,
-        message: f3.message,
-        phi: 1.647,
-        theta: 2.623,
-      },
-      {
-        title: '건강운',
-        score: f4.score,
-        message: f4.message,
-        phi: 2.223,
-        theta: -0.07,
-      },
-      {
-        title: '학업운',
-        score: f5.score,
-        message: f5.message,
-        phi: 1.792,
-        theta: -0.19,
-      },
-    ]);
-    setMounted(true);
+    fetchResult();
   }, []);
 
-  if (!mounted) {
+  if (fortune == null) {
     return <main className='bg2'>로딩중</main>;
   }
 

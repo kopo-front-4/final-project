@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdSunny } from 'react-icons/md';
 import { FaMoon } from 'react-icons/fa6';
-import { useFortune } from '../context/fortune-context';
+import axios from 'axios';
 
 interface UserInputModalProps {
   start: boolean;
@@ -10,7 +10,6 @@ interface UserInputModalProps {
 }
 
 export const UserInputModal: React.FC<UserInputModalProps> = ({ closeModal, start }) => {
-  const fortune = useFortune();
   const navigate = useNavigate();
   const [flipped, setFlipped] = useState(false);
   const [name, setName] = useState<string>('');
@@ -21,22 +20,29 @@ export const UserInputModal: React.FC<UserInputModalProps> = ({ closeModal, star
   const [errorName, setErrorName] = useState('');
   const [errorBirthDate, setErrorBirthDate] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (birthDate.trim() == '') {
       setErrorBirthDate('생년월일은 필수 값입니다.');
       return;
     }
 
-    const obj = {
-      name,
-      birthDate,
-      birthTime,
-      isSolar,
-    };
+    console.log(birthDate);
 
-    fortune.setCode(null);
-    localStorage.setItem('userInfo', JSON.stringify(obj));
-    navigate('/loading');
+    const result = await axios.get('/api/code?birth_date=' + birthDate);
+
+    if (result.status == 200) {
+      const obj = {
+        name,
+        birthDate,
+        birthTime,
+        isSolar,
+      };
+
+      const code = result.data.code;
+
+      localStorage.setItem('userInfo', JSON.stringify(obj));
+      navigate('/loading?code=' + code);
+    }
   };
 
   const handleClose = () => {
